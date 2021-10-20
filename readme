@@ -1,0 +1,17 @@
+# Getting started
+
+* install qmk
+brew install qmk/qmk/qmk
+
+* setup and clone repo
+qmk setup
+
+* clone this repo under ~/qmk_firmware/keyboards/crkbd/keymaps
+clone git@github.com:Devric/crkbd_devric.git devric
+
+* compile, the keymap name matches with the folder name
+qmk compile -kb crkbd/rev1 -km devric
+
+* flash firmware
+qmk flash
+press restart on the keyboard after issuing flash command once compiling is done
