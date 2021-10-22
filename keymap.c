@@ -196,16 +196,17 @@ static void render_luna(int LUNA_X, int LUNA_Y) {
         }
     }
 
-    /* animation timer */
-    if (timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION) {
-        anim_timer = timer_read32();
-        animate_luna();
-    }
 
     /* this fixes the screen on and off bug */
     if (current_wpm > 0) {
         oled_on();
         anim_sleep = timer_read32();
+
+        /* animation timer */
+        if (timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION) {
+            anim_timer = timer_read32();
+            animate_luna();
+        }
     } else if (timer_elapsed32(anim_sleep) > OLED_TIMEOUT) {
         oled_off();
     }
@@ -218,7 +219,7 @@ static void render_luna(int LUNA_X, int LUNA_Y) {
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 
     if (!is_keyboard_master()) {
-        return OLED_ROTATION_180;  // flips the display 180 degrees if offhand, face left
+        return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
     }
     /* return rotation; */ // default face right
 
